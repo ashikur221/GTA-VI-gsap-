@@ -1,6 +1,7 @@
 import { useGSAP } from '@gsap/react';
 import React, { useState } from 'react';
 import gsap from 'gsap';
+import 'remixicon/fonts/remixicon.css'
 
 const App = () => {
 
@@ -31,6 +32,25 @@ const App = () => {
         }
       });
   })
+
+  useGSAP(() => {
+    const main = document.querySelector(".main");
+
+    main?.addEventListener("mousemove", function (e) {
+      const xMove = (e.clientX / window.innerWidth - 0.5) * 40;
+      gsap.to(".main .text", {
+        x: `${xMove * .4}%`,
+      });
+
+      gsap.to(".sky", {
+        x: xMove,
+      });
+
+      gsap.to(".bg", {
+        x: xMove * 1.8,
+      })
+    })
+  }, [showContent])
 
   return (
     <>
@@ -81,15 +101,31 @@ const App = () => {
                 </div>
               </div>
 
+
               <div className="imagesdiv relative overflow-hidden w-full h-screen">
-                <img src="./sky.png" className='absolute top-0 left-0  w-full h-full object-cover' alt="" />
-                <img src="./bg.png" className='absolute top-0 left-0  w-full h-full object-cover' alt="" />
+                <img src="./sky.png" className='absolute sky scale-[1.2] top-0 left-0  w-full h-full object-cover' alt="" />
+                <img src="./bg.png" className='absolute bg scale-[1.3] top-0 left-0  w-full h-full object-cover' alt="" />
+
+
+                <div className="text flex flex-col gap-3 absolute text-white top-20 left-1/2 -translate-x-1/2 text-[12rem] ">
+                  <h1 className='-ml-32 leading-none'>grand</h1>
+                  <h1 className='ml-20 leading-none'>theft</h1>
+                  <h1 className='-ml-20 leading-none'>auto</h1>
+                </div>
 
                 <img
-                  className="absolute -bottom-[40%]  left-1/2 -translate-x-1/2 scale-[0.9]"
+                  className="absolute -bottom-[40%] character  left-1/2 -translate-x-1/2 scale-[0.9]"
                   src="./girlbg.png"
                   alt=""
                 />
+              </div>
+
+              <div className="btmbar text-white absolute bottom-0 left-0 w-full py-10 px-10 bg-gradient-to-t from-black to-transparent">
+                <div className="flex gap-4 items-center">
+                  <i className="ri-arrow-down-line text-white text-2xl"></i>
+                  <h3 className="text-white text-2xl font-[Helvetica]">Scroll Down</h3>
+                </div>
+                <img className='absolute bottom-0 left-1/2 -translate-x-1/2 h-[65px]' src="./ps5.png" alt="" />
               </div>
             </div>
           </div>
